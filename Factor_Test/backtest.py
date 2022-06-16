@@ -36,7 +36,7 @@ class FigFormat(object):
         self.fontSize = fontSize
         self.color = color
 
-# 日频回验        
+# Daily BackTest
 class Backtest(object):
     def __init__(self, dataPath, factorPath, factorFile, backtestParm, figFormat, cost, mask, shift_num):
         self.dataPath = dataPath
