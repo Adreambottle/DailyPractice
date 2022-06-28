@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Mar 18 12:50:27 2020
-
-@author: guili
 """
 
 import math
@@ -67,7 +64,7 @@ def grouping(data, n):
 
 def calTurnover(group):
     '''
-    计算每一组换手率
+    Calculate the Turnover rate
     '''
     size = np.shape(group)
     turnover = []
@@ -86,7 +83,7 @@ def calTurnover(group):
 
 def calc_layer_returns(df_factor, df_f_ret, ret_lag=1, n_quantile=10):
     '''
-    计算分层收益
+    Calcualte the return with different layers
     '''
 
     def quantile_ret(df_x, df_ret, n=10):
@@ -171,8 +168,8 @@ def getMaxDD(nav):
             idx1[i,j] = idx1_temp
             idx2[i,j] = idx2_temp
     
-    # 统计最大回撤
-    maxdd = dd.min(0) # 按列求MIN
+    # Static the biggest withdraw
+    maxdd = dd.min(0)     # 按列求MIN
     idx = np.argmin(dd,0) # 求第一个最小值所在的位置
     
     startIdx = []
@@ -185,7 +182,7 @@ def getMaxDD(nav):
     startDate = times.iloc[startIdx]
     endDate = times.iloc[endIdx]
     
-    # 转换格式
+    # Change the 
     dd = pd.DataFrame(dd)
     dd.index = nav.index
     dd.columns = nav.columns   

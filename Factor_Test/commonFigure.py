@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Mar 18 16:32:07 2020
-
-@author: guili
 """
 
 ## 作图功能

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 19 17:16:11 2020
-
-@author: guili
-"""
 
 import os
 import pandas as pd
@@ -15,7 +10,7 @@ from multiprocessing import Pool
 import warnings
 warnings.filterwarnings("ignore")
 
-# 设置参数        
+# Create the data object        
 class BacktestParm(object):
     def __init__(self, groupNum, startDate, endDate, factorDirection):
         self.groupNum = groupNum
@@ -46,15 +41,16 @@ class Backtest(object):
         self.shift_num = shift_num
         self.cost = cost
         
-        # 提取日频行情数据
+        # Extract the daily market data
         cp = pd.read_csv(os.path.join(dataPath, "close_price.csv"), index_col=0, parse_dates=True)
         cp = cp.loc[backtestParm.startDate: backtestParm.endDate]
         stock_return = cp.pct_change(shift_num).shift(-shift_num)
 
-        # 提取日频因子数据
+        # Extract the daily factor data
         factor = pd.read_csv(os.path.join(factorPath, factorFile), index_col=0, parse_dates=True)
         factor = factor.loc[backtestParm.startDate: backtestParm.endDate]
-        # 决定因子方向
+        
+        # Decide the factor direction
         if self.backtestParm.factorDirection == 'ascending':
             pass
         elif self.backtestParm.factorDirection == 'descending':
@@ -67,7 +63,7 @@ class Backtest(object):
         stock_return[mask.isna()] = np.nan
         factor[mask.isna()] = np.nan
 
-        # 数据成员赋值
+        # Attach the data to the object
         self.factor = factor
         self.stock_return = stock_return 
 
@@ -214,7 +210,7 @@ class Backtest(object):
         
         return results
     
-    #%% 多空收益
+    #%% Profit of the long-short portfolio
     def longShort(self,groupRtn):
               
         groupNum = self.backtestParm.groupNum
@@ -365,7 +361,7 @@ def main_final_result_backtest(weight, rtn, HedgeBenchmark, cost, outputPath):
     return True
 
 
-#%% module测试
+#%% Model test
 if __name__ == '__main__':
 
     factorFile = 'revs60.csv'
